@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.github.javachaos.javadatastructures/com.github.javachaos.javadatastructures.HelloApplication
+                                com.github.javachaos.javadatastructures/com.github.javachaos.javadatastructures.DSApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
