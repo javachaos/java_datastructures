@@ -22,5 +22,6 @@ public class GraphSample {
         graph.edges().add(ab);
         graph.edges().add(ac);
         graph.edges().add(bc);
+
     }
 }
