@@ -1,8 +1,6 @@
 module com.github.javachaos.javadatastructures {
-    requires javafx.controls;
-    requires javafx.fxml;
+    requires transitive org.apache.logging.log4j;
+    requires java.logging;
 
-
-    opens com.github.javachaos.javadatastructures to javafx.fxml;
     exports com.github.javachaos.javadatastructures;
 }

@@ -4,12 +4,8 @@ import java.nio.BufferUnderflowException;
 
 public class Stack<T> {
 
-    /**
-     * In order to relax the number of realloc's we increase the size of the array
-     * by 128 instead of 1.
-     */
-    private static final int SIZE_LIMIT = 128;
-    private int size;
+    private int top;
+    private int capacity;
     private Object[] elements;
 
     public Stack(int initial) {
@@ -17,6 +13,7 @@ public class Stack<T> {
             throw new IllegalArgumentException("Initial size cannot be less than or equal to zero.");
         }
         this.elements = new Object[initial];
+        this.capacity = initial;
     }
 
     public Stack() {
@@ -24,13 +21,14 @@ public class Stack<T> {
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return top == 0;
     }
 
     public void push(T elem) {
-        size++;
-        ensureCapacity();
-        elements[size] = elem;
+        if (top + 1 > capacity) {
+            resize(top * 2);
+        }
+        elements[top++] = elem;
     }
 
     @SuppressWarnings("unchecked")
@@ -38,24 +36,29 @@ public class Stack<T> {
         if (isEmpty()) {
             throw new BufferUnderflowException();
         } else {
-            size--;
-            return (T) elements[size +1];
+            top--;
+            if ((top+1) * 2 < elements.length) {
+                resize(elements.length / 2 + 1);
+            }
+            return (T) elements[top + 1];
         }
     }
 
     /**
      * Resize the underlying array object of this stack
-     * in order to ensure capacity.
-     * @param size the capacity to ensure
+     * @param capacity the new capacity of the underlying array for this stack
      */
-    private void ensureCapacity() {
-        if (size <= 0) {
+    private void resize(int capacity) {
+        if (capacity <= 0) {
             throw new IllegalArgumentException("Negative size.");
         }
-        if (elements.length <= size) {
-            Object[] newElements = new Object[size +SIZE_LIMIT];
+        Object[] newElements = new Object[capacity];
+        if (capacity > elements.length) {
             System.arraycopy(elements, 0, newElements, 0, elements.length);
-            elements = newElements;
+        } else if (capacity < elements.length) {
+            System.arraycopy(elements, 0, newElements, 0, newElements.length);
         }
+        this.capacity = newElements.length;
+        elements = newElements;
     }
 }
