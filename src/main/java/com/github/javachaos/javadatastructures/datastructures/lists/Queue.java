@@ -1,5 +1,6 @@
 package com.github.javachaos.javadatastructures.datastructures.lists;
 
+
 import java.nio.BufferUnderflowException;
 
 public class Queue<T> {
@@ -55,6 +56,9 @@ public class Queue<T> {
     }
 
     public void resize(int newCapacity) {
+        if (newCapacity <= 0) {
+            throw new IllegalArgumentException("Negative resize not possible.");
+        }
         // Create a new array with the desired capacity
         Object[] newArray = new Object[newCapacity];
 

@@ -36,10 +36,10 @@ public class Stack<T> {
         if (isEmpty()) {
             throw new BufferUnderflowException();
         } else {
-            top--;
-            if ((top+1) * 2 < elements.length) {
+            if (top * 2 < elements.length) {
                 resize(elements.length / 2 + 1);
             }
+            top--;
             return (T) elements[top + 1];
         }
     }
