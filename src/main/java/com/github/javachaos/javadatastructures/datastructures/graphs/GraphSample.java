@@ -11,17 +11,17 @@ public class GraphSample {
         Vertex<String> a = new Vertex<>("A");
         Vertex<String> b = new Vertex<>("B");
         Vertex<String> c = new Vertex<>("C");
-        graph.vertices().add(a);
-        graph.vertices().add(b);
-        graph.vertices().add(c);
+        graph.getVertices().add(a);
+        graph.getVertices().add(b);
+        graph.getVertices().add(c);
 
 // add edges to the graph
         Edge<String> ab = new Edge<>(a, b);
         Edge<String> ac = new Edge<>(a, c);
         Edge<String> bc = new Edge<>(b, c);
-        graph.edges().add(ab);
-        graph.edges().add(ac);
-        graph.edges().add(bc);
+        graph.getEdges().add(ab);
+        graph.getEdges().add(ac);
+        graph.getEdges().add(bc);
 
     }
 }
